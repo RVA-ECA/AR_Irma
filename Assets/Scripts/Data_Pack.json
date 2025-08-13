@@ -1,0 +1,142 @@
+[
+    {
+        "serial": "A1B2C3",
+        "received": true,
+        "divergence": false,
+        "warranty": "Validar",
+        "commented": false
+    },
+    {
+        "serial": "D4E5F6",
+        "received": false,
+        "divergence": true,
+        "warranty": "Espirado",
+        "commented": true
+    },
+    {
+        "serial": "G7H8I9",
+        "received": true,
+        "divergence": false,
+        "warranty": "Validar",
+        "commented": false
+    },
+    {
+        "serial": "J0K1L2",
+        "received": false,
+        "divergence": true,
+        "warranty": "Espirado",
+        "commented": true
+    },
+    {
+        "serial": "M3N4O5",
+        "received": true,
+        "divergence": false,
+        "warranty": "Validar",
+        "commented": false
+    },
+    {
+        "serial": "P6Q7R8",
+        "received": false,
+        "divergence": true,
+        "warranty": "Espirado",
+        "commented": true
+    },
+    {
+        "serial": "S9T0U1",
+        "received": true,
+        "divergence": false,
+        "warranty": "Validar",
+        "commented": false
+    },
+    {
+        "serial": "V2W3X4",
+        "received": false,
+        "divergence": true,
+        "warranty": "Espirado",
+        "commented": true
+    },
+    {
+        "serial": "Y5Z6A7",
+        "received": true,
+        "divergence": false,
+        "warranty": "Validar",
+        "commented": false
+    },
+    {
+        "serial": "B8C9D0",
+        "received": false,
+        "divergence": true,
+        "warranty": "Espirado",
+        "commented": true
+    },
+    {
+        "serial": "E1F2G3",
+        "received": true,
+        "divergence": false,
+        "warranty": "Validar",
+        "commented": false
+    },
+    {
+        "serial": "H4I5J6",
+        "received": false,
+        "divergence": true,
+        "warranty": "Espirado",
+        "commented": true
+    },
+    {
+        "serial": "K7L8M9",
+        "received": true,
+        "divergence": false,
+        "warranty": "Validar",
+        "commented": false
+    },
+    {
+        "serial": "N0O1P2",
+        "received": false,
+        "divergence": true,
+        "warranty": "Espirado",
+        "commented": true
+    },
+    {
+        "serial": "Q3R4S5",
+        "received": true,
+        "divergence": false,
+        "warranty": "Validar",
+        "commented": false
+    },
+    {
+        "serial": "T6U7V8",
+        "received": false,
+        "divergence": true,
+        "warranty": "Espirado",
+        "commented": true
+    },
+    {
+        "serial": "W9X0Y1",
+        "received": true,
+        "divergence": false,
+        "warranty": "Validar",
+        "commented": false
+    },
+    {
+        "serial": "Z2A3B4",
+        "received": false,
+        "divergence": true,
+        "warranty": "Espirado",
+        "commented": true
+    },
+    {
+        "serial": "C5D6E7",
+        "received": true,
+        "divergence": false,
+        "warranty": "Validar",
+        "commented": false
+    },
+    {
+        "serial": "F8G9H0",
+        "received": false,
+        "divergence": true,
+        "warranty": "Espirado",
+        "commented": true
+    }
+]
