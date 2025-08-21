@@ -5,6 +5,8 @@ using System.IO;
 using System.Text;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
+using System.Linq;
+
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -24,6 +26,7 @@ public class Info_Memorys : MonoBehaviour
     public TextAsset ArquivoDestino;
     public InputActionProperty SalvarMemoria;
     public InputActionProperty ExclurMemoria;
+    public TMP_Text HistEntradas;
 
     [Serializable]
     public class Item
@@ -192,9 +195,8 @@ public class Info_Memorys : MonoBehaviour
         }
 
         string assetPath = AssetDatabase.GetAssetPath(ArquivoDestino);
-        string caminhoFinal = Path.Combine(Application.dataPath, assetPath.Replace("Assets/", ""));
+        string caminhoFinal = Path.Combine(Application.dataPath, assetPath.Substring("Assets/".Length));
 
-        // Garante item para exportar
         var item = FindBySerial(serialToFilter);
         if (item == null)
         {
@@ -202,11 +204,10 @@ public class Info_Memorys : MonoBehaviour
             return;
         }
 
-        // Lê arquivo existente (respeitando quebras em campos)
         List<string[]> rows;
         if (File.Exists(caminhoFinal))
         {
-            string conteudo = File.ReadAllText(caminhoFinal, System.Text.Encoding.UTF8);
+            string conteudo = File.ReadAllText(caminhoFinal, Encoding.UTF8);
             rows = ParseCsvRows(conteudo);
             if (rows.Count == 0)
                 rows.Add(new[] { "numero", "serial", "numero", "texto", "texto" });
@@ -217,23 +218,21 @@ public class Info_Memorys : MonoBehaviour
             rows.Add(new[] { "numero", "serial", "numero", "texto", "texto" });
         }
 
-        // Atualiza/insere (serial é coluna 1)
         bool achou = false;
         string serialKey = (serialToFilter ?? "").Trim();
         for (int i = 1; i < rows.Count; i++)
         {
-            var r = rows[i];
-            string colSerial = (r.Length > 1 ? r[1] : "").Trim();
+            string colSerial = (rows[i].Length > 1 ? rows[i][1] : "").Trim();
             if (string.Equals(colSerial, serialKey, StringComparison.OrdinalIgnoreCase))
             {
                 rows[i] = new[]
                 {
-                    item.memoryType.ToString(),
-                    item.serial,
-                    item.warranty.ToString(),
-                    item.comentario,
-                    item.historico
-                };
+                item.memoryType.ToString(),
+                item.serial,
+                item.warranty.ToString(),
+                item.comentario,
+                item.historico
+            };
                 achou = true;
                 break;
             }
@@ -243,34 +242,103 @@ public class Info_Memorys : MonoBehaviour
         {
             rows.Add(new[]
             {
-                item.memoryType.ToString(),
-                item.serial,
-                item.warranty.ToString(),
-                item.comentario,
-                item.historico
-            });
+            item.memoryType.ToString(),
+            item.serial,
+            item.warranty.ToString(),
+            item.comentario,
+            item.historico
+        });
         }
 
-        // Escreve em CSV corretamente escapado
-        using (var sw = new StreamWriter(caminhoFinal, false, System.Text.Encoding.UTF8))
+        // Remove linhas totalmente vazias
+        rows.RemoveAll(r =>
+            r == null || r.All(c => string.IsNullOrWhiteSpace(c))
+        );
+
+        // Salva no arquivo
+        var linhas = rows.Select(r =>
+            string.Join(",", r.Select(c =>
+                c.Contains(",") || c.Contains("\n") ? $"\"{c.Replace("\"", "\"\"")}\"" : c
+            ))
+        );
+
+        File.WriteAllText(caminhoFinal, string.Join("\n", linhas), Encoding.UTF8);
+
+        Debug.Log("Exportação concluída.");
+
+        // Chama seleção aleatória (opcional)
+        SelecionarMemoriaAleatoria();
+#endif
+    }
+
+    public void SelecionarMemoriaAleatoria()
+    {
+        if (items.Count == 0)
         {
-            for (int i = 0; i < rows.Count; i++)
+            Debug.LogWarning("Nenhum item disponível para seleção aleatória.");
+            return;
+        }
+
+        // Escolhe índice aleatório
+        int index = UnityEngine.Random.Range(0, items.Count);
+        var mem = items[index];
+
+        // Preenche campos de texto
+        Memory_Type.text = mem.memoryType == 0 ? "Memória RAM" :
+                           mem.memoryType == 1 ? "SSD NVME" :
+                           $"Tipo {mem.memoryType}";
+
+        Serial.text = mem.serial;
+        Warranty.text = mem.warranty == 0 ? "Fora da garantia" :
+                        mem.warranty == 1 ? "Garantia ativa" :
+                        mem.warranty == 2 ? "Garantia Vencida" :
+                        mem.warranty.ToString();
+
+        Comment.text = mem.comentario;
+        History.text = mem.historico;
+
+        // Atualiza serial atual para exportação/edição se necessário
+        serialToFilter = mem.serial;
+
+        #if UNITY_EDITOR
+        if (ArquivoDestino != null)
+        {
+            try
             {
-                var r = rows[i];
-                // garante 5 colunas
-                string[] f = new string[5];
-                for (int j = 0; j < 5; j++) f[j] = (j < r.Length ? r[j] : "");
-                sw.WriteLine(string.Join(",", new[]
+                string assetPath = AssetDatabase.GetAssetPath(ArquivoDestino);
+                string caminhoFinal = Path.Combine(Application.dataPath, assetPath.Replace("Assets/", ""));
+
+                if (File.Exists(caminhoFinal))
                 {
-                    CsvEscape(f[0]), CsvEscape(f[1]), CsvEscape(f[2]), CsvEscape(f[3]), CsvEscape(f[4])
-                }));
+                    string conteudo = File.ReadAllText(caminhoFinal, Encoding.UTF8);
+                    var rows = ParseCsvRows(conteudo);
+
+                    StringBuilder sb = new StringBuilder();
+                    for (int i = 1; i < rows.Count; i++) // pula cabeçalho
+                    {
+                        if (rows[i].Length > 1 && !string.IsNullOrWhiteSpace(rows[i][1]))
+                            sb.AppendLine(rows[i][1]);
+                    }
+
+                    HistEntradas.text = sb.ToString().TrimEnd();
+                }
+                else
+                {
+                    HistEntradas.text = "Arquivo de destino não encontrado.";
+                }
+            }
+            catch (Exception ex)
+            {
+                HistEntradas.text = $"Erro ao ler arquivo: {ex.Message}";
             }
         }
-
-        Debug.Log($"Dados do serial '{serialToFilter}' exportados para: {caminhoFinal}");
-#else
-        Debug.LogError("Exportar dentro de Assets só funciona no Editor. Em builds, use Application.persistentDataPath.");
+        else
+        {
+            HistEntradas.text = "Arquivo de destino não atribuído.";
+        }
 #endif
+
+        Debug.Log($"Memória aleatória selecionada: {mem.serial}");
     }
 
     public void LimparMemoria()

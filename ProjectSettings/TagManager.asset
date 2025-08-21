@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Indicador
+  - Mindinho
+  - Anelar
+  - Medio
+  - Polegar
+  - Palma
   layers:
   - Default
   - TransparentFX
