@@ -1398,7 +1398,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 975645404}
   m_Direction: 2
   m_Value: 1
-  m_Size: 1
+  m_Size: 0.9999981
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1613,7 +1613,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -291.5, y: 310.5}
+  m_AnchoredPosition: {x: -291.5, y: 310.49994}
   m_SizeDelta: {x: 600, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1416149880
@@ -1821,52 +1821,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1552474853}
   m_CullTransparentMesh: 1
---- !u!1 &1614525595
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1614525597}
-  - component: {fileID: 1614525598}
-  m_Layer: 0
-  m_Name: JsonReader
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1614525597
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1614525595}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 577.7271, y: 271.05063, z: -0.82898337}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1614525598
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1614525595}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90ffa2d6408872040bc08f4b532ae869, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  historicoJsonFile: {fileID: 4900000, guid: 625a68fee06702743b6aa134c258602a, type: 3}
-  uiController: {fileID: 1859875818}
 --- !u!1 &1635076313
 GameObject:
   m_ObjectHideFlags: 0
@@ -2019,6 +1973,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f788d20b28a665469cc7e291caa813b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jsonFile: {fileID: 4900000, guid: 625a68fee06702743b6aa134c258602a, type: 3}
   contentContainer: {fileID: 1416149879}
   historicoItemPrefab: {fileID: 5403528783225911108, guid: 7f0be3f76582a1d4f818fd3079cf89e1, type: 3}
   concluidoIcon: {fileID: 21300000, guid: 40aa2ebf03824d245965fdc140ead561, type: 3}
@@ -2047,5 +2002,4 @@ SceneRoots:
   - {fileID: 464503293}
   - {fileID: 1199722841}
   - {fileID: 1859875819}
-  - {fileID: 1614525597}
   - {fileID: 550004904}
