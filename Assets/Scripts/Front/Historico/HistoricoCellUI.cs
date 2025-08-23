@@ -10,16 +10,20 @@ public class HistoricoItemUI : MonoBehaviour
 
     public void Setup(HistoricoEntry entry, HistoricoUIController controller)
     {
+        // Exibindo o RMA de forma mais clara
         if (rmaText != null)
         {
-            rmaText.text = string.IsNullOrEmpty(entry.RMA) ? "MA: Pendente" : "MA: " + entry.RMA;
+            // Caso o RMA esteja vazio ou nulo, mostra "MA: Não informado"
+            rmaText.text = string.IsNullOrEmpty(entry.RMA) ? "MA: Não informado" : "MA: " + entry.RMA;
         }
 
+        // Exibindo o nome do cliente
         if (clienteText != null)
         {
             clienteText.text = "Cliente: " + entry.CLIENTE;
         }
 
+        // Exibindo o ícone de status com base no status da entrada
         if (statusIcon != null)
         {
             switch (entry.STATUS)
