@@ -5,15 +5,17 @@ using System;
 
 public class HistoricoUIController : MonoBehaviour
 {
+    private const string DEFAULT_DATE_TEXT = "00/00/0000";
+
     [Header("JSON")]
     public TextAsset jsonFile;
 
     [Header("UI")]
-    public Transform contentContainer;     // Content do ScrollView
-    public GameObject historicoItemPrefab; // Prefab Historico_Cell
-    public GameObject miniTela;            // Mini tela ao lado, oculta inicialmente
-    public TMP_Text dataRecebimentoText;   // TextField para exibir DATA_RECEBIMENTO
-    public TMP_Text dataSaidaText;         // TextField para exibir DATA_SAIDA
+    public Transform contentContainer;
+    public GameObject historicoItemPrefab;
+    public GameObject miniTela;
+    public TMP_Text dataRecebimentoText;
+    public TMP_Text dataSaidaText;
 
     [Header("Ícones")]
     public Sprite concluidoIcon;
@@ -44,7 +46,6 @@ public class HistoricoUIController : MonoBehaviour
             return;
         }
 
-        // Wrap do JSON para JsonUtility
         string wrappedJson = "{ \"historico\": " + jsonFile.text + "}";
         HistoricoList historicoList = JsonUtility.FromJson<HistoricoList>(wrappedJson);
 
@@ -76,7 +77,6 @@ public class HistoricoUIController : MonoBehaviour
                 default: statusIcon.sprite = null; break;
             }
 
-            // Configura o botão para enviar o evento de clique
             if (button != null)
             {
                 HistoricoButton historicoButton = button.gameObject.AddComponent<HistoricoButton>();
@@ -86,20 +86,32 @@ public class HistoricoUIController : MonoBehaviour
         }
     }
 
-    // Esse método é chamado quando qualquer botão é clicado
     private void HandleButtonClicked(HistoricoEntry entry)
     {
-        if (miniTela.activeSelf && dataRecebimentoText.text.Contains(entry.DATA_RECEBIMENTO))
+        string dataRecebimentoFormatada = FormatarData(entry.DATA_RECEBIMENTO);
+
+        if (miniTela.activeSelf && dataRecebimentoText.text.Contains(dataRecebimentoFormatada))
         {
-            // Se o mesmo botão for clicado, esconde a tela
             miniTela.SetActive(false);
         }
         else
         {
-            // Mostra mini tela com os dados da célula
             miniTela.SetActive(true);
-            dataRecebimentoText.text = "Recebimento: \n" + (string.IsNullOrEmpty(entry.DATA_RECEBIMENTO) ? "-" : entry.DATA_RECEBIMENTO);
-            dataSaidaText.text = "Saída: \n" + (string.IsNullOrEmpty(entry.DATA_SAIDA) ? "-" : entry.DATA_SAIDA);
+
+            string dataSaidaFormatada = FormatarData(entry.DATA_SAIDA);
+
+            dataRecebimentoText.text = $"recebimento\n({dataRecebimentoFormatada})";
+            dataSaidaText.text = $"saída\n({dataSaidaFormatada})";
         }
+    }
+
+    private string FormatarData(string dataOriginal)
+    {
+        if (string.IsNullOrEmpty(dataOriginal))
+        {
+            return DEFAULT_DATE_TEXT;
+        }
+        
+        return dataOriginal.Replace(":", "/").Replace(";", "/").Replace(" ", "/");
     }
 }
