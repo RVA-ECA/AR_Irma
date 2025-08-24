@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 5f788d20b28a665469cc7e291caa813b
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - jsonFile: {instanceID: 0}
+  - contentContainer: {instanceID: 0}
+  - historicoItemPrefab: {fileID: 5403528783225911108, guid: 7f0be3f76582a1d4f818fd3079cf89e1, type: 3}
+  - concluidoIcon: {instanceID: 0}
+  - naoRecebidoIcon: {instanceID: 0}
+  - observacaoIcon: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
