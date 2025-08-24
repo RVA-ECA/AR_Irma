@@ -1,7 +1,7 @@
 [
     {
         "RMA": "2024-RMA-001",
-        "CLIENTE": "Ana Santos",
+        "CLIENTE": "Cliente: Ana Santos",
         "STATUS": "Concluido",
         "DATA_RECEBIMENTO": "2024-07-01",
         "DATA_SAIDA": "2024-07-05",
@@ -40,7 +40,7 @@
     },
     {
         "RMA": "2024-RMA-002",
-        "CLIENTE": "Bruno Lima",
+        "CLIENTE": "Cliente: Bruno Lima",
         "STATUS": "Observação",
         "DATA_RECEBIMENTO": "2024-07-02",
         "DATA_SAIDA": null,
@@ -79,7 +79,7 @@
     },
     {
         "RMA": "2024-RMA-003",
-        "CLIENTE": "Carlos Oliveira",
+        "CLIENTE": "Cliente: Carlos Oliveira",
         "STATUS": "Nao recebido",
         "DATA_RECEBIMENTO": "2024-07-03",
         "DATA_SAIDA": null,
@@ -118,7 +118,7 @@
     },
     {
         "RMA": "2024-RMA-004",
-        "CLIENTE": "Daniela Ferreira",
+        "CLIENTE": "Cliente: Daniela Ferreira",
         "STATUS": "Concluido",
         "DATA_RECEBIMENTO": "2024-07-04",
         "DATA_SAIDA": "2024-07-07",
@@ -157,7 +157,7 @@
     },
     {
         "RMA": "2024-RMA-005",
-        "CLIENTE": "Eduardo Souza",
+        "CLIENTE": "Cliente: Eduardo Souza",
         "STATUS": "Nao recebido",
         "DATA_RECEBIMENTO": "2024-07-05",
         "DATA_SAIDA": null,
@@ -196,7 +196,7 @@
     },
     {
         "RMA": "2024-RMA-006",
-        "CLIENTE": "Fernanda Costa",
+        "CLIENTE": "Cliente: Fernanda Costa",
         "STATUS": "Concluido",
         "DATA_RECEBIMENTO": "2024-07-06",
         "DATA_SAIDA": "2024-07-10",
@@ -235,7 +235,7 @@
     },
     {
         "RMA": "2024-RMA-007",
-        "CLIENTE": "Gabriel Almeida",
+        "CLIENTE": "Cliente: Gabriel Almeida",
         "STATUS": "Nao recebido",
         "DATA_RECEBIMENTO": "2024-07-07",
         "DATA_SAIDA": null,
@@ -274,7 +274,7 @@
     },
     {
         "RMA": "2024-RMA-008",
-        "CLIENTE": "Helena Martins",
+        "CLIENTE": "Cliente: Helena Martins",
         "STATUS": "Concluido",
         "DATA_RECEBIMENTO": "2024-07-08",
         "DATA_SAIDA": "2024-07-12",
@@ -313,7 +313,7 @@
     },
     {
         "RMA": "2024-RMA-009",
-        "CLIENTE": "Igor Mendes",
+        "CLIENTE": "Cliente: Igor Mendes",
         "STATUS": "Observação",
         "DATA_RECEBIMENTO": "2024-07-09",
         "DATA_SAIDA": null,
@@ -352,7 +352,7 @@
     },
     {
         "RMA": "2024-RMA-010",
-        "CLIENTE": "Juliana Rocha",
+        "CLIENTE": "Cliente: Juliana Rocha",
         "STATUS": "Concluido",
         "DATA_RECEBIMENTO": "2024-07-10",
         "DATA_SAIDA": "2024-07-14",
