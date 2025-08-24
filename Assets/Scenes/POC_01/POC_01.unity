@@ -221,6 +221,7 @@ MonoBehaviour:
   dataSaidaText: {fileID: 568565557}
   tela1: {fileID: 1501862634}
   tela2: {fileID: 461189521}
+  ReturnButton: {fileID: 980747176}
   concluidoIcon: {fileID: 21300000, guid: 40aa2ebf03824d245965fdc140ead561, type: 3}
   naoRecebidoIcon: {fileID: 21300000, guid: c0d5633cb85b9a5448abc1e9775a187a, type: 3}
   observacaoIcon: {fileID: 21300000, guid: 54bd3281e6ba3724da10c65e82754237, type: 3}
@@ -287,6 +288,10 @@ PrefabInstance:
     - target: {fileID: 1788379355796347318, guid: f6d7989d85c475945b521afde5a1cc03, type: 3}
       propertyPath: m_Name
       value: HistoricoUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 1788379355796347318, guid: f6d7989d85c475945b521afde5a1cc03, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1879427671327398683, guid: f6d7989d85c475945b521afde5a1cc03, type: 3}
       propertyPath: m_Pivot.x
@@ -842,6 +847,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 831942112}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &980747176 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5823538796722705066, guid: d31b461c257f5fa4cb6bf3d8871a321c, type: 3}
+  m_PrefabInstance: {fileID: 5952222909319743511}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1004187975
 GameObject:
   m_ObjectHideFlags: 0
@@ -1488,7 +1504,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 982890984737666879, guid: d31b461c257f5fa4cb6bf3d8871a321c, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1800653529107015008, guid: d31b461c257f5fa4cb6bf3d8871a321c, type: 3}
       propertyPath: m_Pivot.x

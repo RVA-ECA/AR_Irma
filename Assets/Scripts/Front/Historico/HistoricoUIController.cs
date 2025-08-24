@@ -5,7 +5,7 @@ using System;
 
 public class HistoricoUIController : MonoBehaviour
 {
-    private const string DEFAULT_DATE_TEXT = ".......";
+    private const string DEFAULT_DATE_TEXT = "00/00/0000";
 
     [Header("JSON")]
     public TextAsset jsonFile;
@@ -21,10 +21,13 @@ public class HistoricoUIController : MonoBehaviour
     public GameObject tela1;
     public GameObject tela2;
 
+    [Header("Botões")]
+    public Button ReturnButton;
+
     [Header("Ícones")]
     public Sprite concluidoIcon;
     public Sprite naoRecebidoIcon;
-    public Sprite observacaoIcon;
+    public Sprite observacaoIcon; // Referência ao ícone restaurada
 
     [System.Serializable]
     public class HistoricoEntry
@@ -54,6 +57,11 @@ public class HistoricoUIController : MonoBehaviour
         HistoricoList historicoList = JsonUtility.FromJson<HistoricoList>(wrappedJson);
 
         DisplayHistorico(historicoList);
+
+        if (ReturnButton != null)
+        {
+            ReturnButton.onClick.AddListener(() => TrocarTelas(tela1, tela2));
+        }
     }
 
     public void DisplayHistorico(HistoricoList historicoLista)
@@ -89,7 +97,7 @@ public class HistoricoUIController : MonoBehaviour
             }
             if (rmaButton != null)
             {
-                rmaButton.onClick.AddListener(() => TrocarTelas());
+                rmaButton.onClick.AddListener(() => TrocarTelas(tela2, tela1));
             }
         }
     }
@@ -113,24 +121,15 @@ public class HistoricoUIController : MonoBehaviour
         }
     }
 
-    public void TrocarTelas()
+    public void TrocarTelas(GameObject telaParaAtivar, GameObject telaParaDesativar)
     {
-        if (tela1 != null)
+        if (telaParaDesativar != null)
         {
-            tela1.SetActive(false);
+            telaParaDesativar.SetActive(false);
         }
-        else
+        if (telaParaAtivar != null)
         {
-            Debug.LogWarning("Tela 1 não atribuída!");
-        }
-
-        if (tela2 != null)
-        {
-            tela2.SetActive(true);
-        }
-        else
-        {
-            Debug.LogWarning("Tela 2 não atribuída!");
+            telaParaAtivar.SetActive(true);
         }
     }
 
