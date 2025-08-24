@@ -1,72 +1,392 @@
 [
-  {
-    "RMA": "2024-RMA-001",
-    "CLIENTE": "Ana Santos",
-    "STATUS": "Concluido",
-    "DATA RECEBIMENTO": "2024-07-01",
-    "DATA SAIDA": "2024-07-05"
-  },
-  {
-    "RMA": "2024-RMA-002",
-    "CLIENTE": "Bruno Lima",
-    "STATUS": "Observação",
-    "DATA RECEBIMENTO": "2024-07-02",
-    "DATA SAIDA": null
-  },
-  {
-    "RMA": "2024-RMA-003",
-    "CLIENTE": "Carla Oliveira",
-    "STATUS": "Nao recebido",
-    "DATA RECEBIMENTO": null,
-    "DATA SAIDA": null
-  },
-  {
-    "RMA": "2024-RMA-004",
-    "CLIENTE": "Daniel Rocha",
-    "STATUS": "Concluido",
-    "DATA RECEBIMENTO": "2024-07-03",
-    "DATA SAIDA": "2024-07-08"
-  },
-  {
-    "RMA": "2024-RMA-005",
-    "CLIENTE": "Erica Costa",
-    "STATUS": "Observação",
-    "DATA RECEBIMENTO": "2024-07-05",
-    "DATA SAIDA": null
-  },
-  {
-    "RMA": "2024-RMA-006",
-    "CLIENTE": "Fernando Pereira",
-    "STATUS": "Concluido",
-    "DATA RECEBIMENTO": "2024-07-06",
-    "DATA SAIDA": "2024-07-10"
-  },
-  {
-    "RMA": "2024-RMA-007",
-    "CLIENTE": "Gabriela Alves",
-    "STATUS": "Nao recebido",
-    "DATA RECEBIMENTO": null,
-    "DATA SAIDA": null
-  },
-  {
-    "RMA": "2024-RMA-008",
-    "CLIENTE": "Henrique Gomes",
-    "STATUS": "Observação",
-    "DATA RECEBIMENTO": "2024-07-09",
-    "DATA SAIDA": null
-  },
-  {
-    "RMA": "2024-RMA-009",
-    "CLIENTE": "Isabela Martins",
-    "STATUS": "Concluido",
-    "DATA RECEBIMENTO": "2024-07-11",
-    "DATA SAIDA": "2024-07-15"
-  },
-  {
-    "RMA": "2024-RMA-010",
-    "CLIENTE": "João Ribeiro",
-    "STATUS": "Nao recebido",
-    "DATA RECEBIMENTO": null,
-    "DATA SAIDA": null
-  }
+    {
+        "RMA": "2024-RMA-001",
+        "CLIENTE": "Ana Santos",
+        "STATUS": "Concluido",
+        "DATA_RECEBIMENTO": "2024-07-01",
+        "DATA_SAIDA": "2024-07-05",
+        "PECAS": [
+            {
+                "SERIAL": 123456,
+                "RECEBIDA": true,
+                "DIVERGENCIA": false,
+                "GARANTIA": true
+            },
+            {
+                "SERIAL": 789012,
+                "RECEBIDA": true,
+                "DIVERGENCIA": true,
+                "GARANTIA": false
+            },
+            {
+                "SERIAL": 111222,
+                "RECEBIDA": true,
+                "DIVERGENCIA": false,
+                "GARANTIA": true
+            },
+            {
+                "SERIAL": 333444,
+                "RECEBIDA": false,
+                "DIVERGENCIA": false,
+                "GARANTIA": false
+            },
+            {
+                "SERIAL": 555666,
+                "RECEBIDA": true,
+                "DIVERGENCIA": false,
+                "GARANTIA": true
+            }
+        ]
+    },
+    {
+        "RMA": "2024-RMA-002",
+        "CLIENTE": "Bruno Lima",
+        "STATUS": "Observação",
+        "DATA_RECEBIMENTO": "2024-07-02",
+        "DATA_SAIDA": null,
+        "PECAS": [
+            {
+                "SERIAL": 654321,
+                "RECEBIDA": false,
+                "DIVERGENCIA": false,
+                "GARANTIA": true
+            },
+            {
+                "SERIAL": 777888,
+                "RECEBIDA": true,
+                "DIVERGENCIA": false,
+                "GARANTIA": true
+            },
+            {
+                "SERIAL": 999000,
+                "RECEBIDA": true,
+                "DIVERGENCIA": true,
+                "GARANTIA": false
+            },
+            {
+                "SERIAL": 112233,
+                "RECEBIDA": false,
+                "DIVERGENCIA": false,
+                "GARANTIA": true
+            },
+            {
+                "SERIAL": 445566,
+                "RECEBIDA": true,
+                "DIVERGENCIA": false,
+                "GARANTIA": true
+            }
+        ]
+    },
+    {
+        "RMA": "2024-RMA-003",
+        "CLIENTE": "Carlos Oliveira",
+        "STATUS": "Nao recebido",
+        "DATA_RECEBIMENTO": "2024-07-03",
+        "DATA_SAIDA": null,
+        "PECAS": [
+            {
+                "SERIAL": 223344,
+                "RECEBIDA": true,
+                "DIVERGENCIA": false,
+                "GARANTIA": true
+            },
+            {
+                "SERIAL": 556677,
+                "RECEBIDA": true,
+                "DIVERGENCIA": false,
+                "GARANTIA": false
+            },
+            {
+                "SERIAL": 889900,
+                "RECEBIDA": false,
+                "DIVERGENCIA": false,
+                "GARANTIA": true
+            },
+            {
+                "SERIAL": 334455,
+                "RECEBIDA": true,
+                "DIVERGENCIA": true,
+                "GARANTIA": false
+            },
+            {
+                "SERIAL": 667788,
+                "RECEBIDA": true,
+                "DIVERGENCIA": false,
+                "GARANTIA": true
+            }
+        ]
+    },
+    {
+        "RMA": "2024-RMA-004",
+        "CLIENTE": "Daniela Ferreira",
+        "STATUS": "Concluido",
+        "DATA_RECEBIMENTO": "2024-07-04",
+        "DATA_SAIDA": "2024-07-07",
+        "PECAS": [
+            {
+                "SERIAL": 445577,
+                "RECEBIDA": true,
+                "DIVERGENCIA": false,
+                "GARANTIA": true
+            },
+            {
+                "SERIAL": 778899,
+                "RECEBIDA": false,
+                "DIVERGENCIA": false,
+                "GARANTIA": false
+            },
+            {
+                "SERIAL": 112244,
+                "RECEBIDA": true,
+                "DIVERGENCIA": true,
+                "GARANTIA": false
+            },
+            {
+                "SERIAL": 556688,
+                "RECEBIDA": true,
+                "DIVERGENCIA": false,
+                "GARANTIA": true
+            },
+            {
+                "SERIAL": 990011,
+                "RECEBIDA": true,
+                "DIVERGENCIA": false,
+                "GARANTIA": true
+            }
+        ]
+    },
+    {
+        "RMA": "2024-RMA-005",
+        "CLIENTE": "Eduardo Souza",
+        "STATUS": "Nao recebido",
+        "DATA_RECEBIMENTO": "2024-07-05",
+        "DATA_SAIDA": null,
+        "PECAS": [
+            {
+                "SERIAL": 123789,
+                "RECEBIDA": false,
+                "DIVERGENCIA": false,
+                "GARANTIA": true
+            },
+            {
+                "SERIAL": 456123,
+                "RECEBIDA": true,
+                "DIVERGENCIA": false,
+                "GARANTIA": true
+            },
+            {
+                "SERIAL": 789456,
+                "RECEBIDA": true,
+                "DIVERGENCIA": true,
+                "GARANTIA": false
+            },
+            {
+                "SERIAL": 321654,
+                "RECEBIDA": false,
+                "DIVERGENCIA": false,
+                "GARANTIA": true
+            },
+            {
+                "SERIAL": 654987,
+                "RECEBIDA": true,
+                "DIVERGENCIA": false,
+                "GARANTIA": true
+            }
+        ]
+    },
+    {
+        "RMA": "2024-RMA-006",
+        "CLIENTE": "Fernanda Costa",
+        "STATUS": "Concluido",
+        "DATA_RECEBIMENTO": "2024-07-06",
+        "DATA_SAIDA": "2024-07-10",
+        "PECAS": [
+            {
+                "SERIAL": 741852,
+                "RECEBIDA": true,
+                "DIVERGENCIA": false,
+                "GARANTIA": true
+            },
+            {
+                "SERIAL": 963258,
+                "RECEBIDA": true,
+                "DIVERGENCIA": false,
+                "GARANTIA": false
+            },
+            {
+                "SERIAL": 159357,
+                "RECEBIDA": false,
+                "DIVERGENCIA": false,
+                "GARANTIA": true
+            },
+            {
+                "SERIAL": 357159,
+                "RECEBIDA": true,
+                "DIVERGENCIA": true,
+                "GARANTIA": false
+            },
+            {
+                "SERIAL": 852741,
+                "RECEBIDA": true,
+                "DIVERGENCIA": false,
+                "GARANTIA": true
+            }
+        ]
+    },
+    {
+        "RMA": "2024-RMA-007",
+        "CLIENTE": "Gabriel Almeida",
+        "STATUS": "Nao recebido",
+        "DATA_RECEBIMENTO": "2024-07-07",
+        "DATA_SAIDA": null,
+        "PECAS": [
+            {
+                "SERIAL": 111999,
+                "RECEBIDA": true,
+                "DIVERGENCIA": false,
+                "GARANTIA": true
+            },
+            {
+                "SERIAL": 222888,
+                "RECEBIDA": true,
+                "DIVERGENCIA": true,
+                "GARANTIA": false
+            },
+            {
+                "SERIAL": 333777,
+                "RECEBIDA": false,
+                "DIVERGENCIA": false,
+                "GARANTIA": true
+            },
+            {
+                "SERIAL": 444666,
+                "RECEBIDA": true,
+                "DIVERGENCIA": false,
+                "GARANTIA": true
+            },
+            {
+                "SERIAL": 555555,
+                "RECEBIDA": true,
+                "DIVERGENCIA": false,
+                "GARANTIA": false
+            }
+        ]
+    },
+    {
+        "RMA": "2024-RMA-008",
+        "CLIENTE": "Helena Martins",
+        "STATUS": "Concluido",
+        "DATA_RECEBIMENTO": "2024-07-08",
+        "DATA_SAIDA": "2024-07-12",
+        "PECAS": [
+            {
+                "SERIAL": 666111,
+                "RECEBIDA": true,
+                "DIVERGENCIA": false,
+                "GARANTIA": true
+            },
+            {
+                "SERIAL": 777222,
+                "RECEBIDA": false,
+                "DIVERGENCIA": false,
+                "GARANTIA": false
+            },
+            {
+                "SERIAL": 888333,
+                "RECEBIDA": true,
+                "DIVERGENCIA": true,
+                "GARANTIA": false
+            },
+            {
+                "SERIAL": 999444,
+                "RECEBIDA": true,
+                "DIVERGENCIA": false,
+                "GARANTIA": true
+            },
+            {
+                "SERIAL": 123654,
+                "RECEBIDA": true,
+                "DIVERGENCIA": false,
+                "GARANTIA": true
+            }
+        ]
+    },
+    {
+        "RMA": "2024-RMA-009",
+        "CLIENTE": "Igor Mendes",
+        "STATUS": "Observação",
+        "DATA_RECEBIMENTO": "2024-07-09",
+        "DATA_SAIDA": null,
+        "PECAS": [
+            {
+                "SERIAL": 456789,
+                "RECEBIDA": false,
+                "DIVERGENCIA": false,
+                "GARANTIA": true
+            },
+            {
+                "SERIAL": 987654,
+                "RECEBIDA": true,
+                "DIVERGENCIA": false,
+                "GARANTIA": true
+            },
+            {
+                "SERIAL": 654321,
+                "RECEBIDA": true,
+                "DIVERGENCIA": true,
+                "GARANTIA": false
+            },
+            {
+                "SERIAL": 321987,
+                "RECEBIDA": false,
+                "DIVERGENCIA": false,
+                "GARANTIA": true
+            },
+            {
+                "SERIAL": 789123,
+                "RECEBIDA": true,
+                "DIVERGENCIA": false,
+                "GARANTIA": true
+            }
+        ]
+    },
+    {
+        "RMA": "2024-RMA-010",
+        "CLIENTE": "Juliana Rocha",
+        "STATUS": "Concluido",
+        "DATA_RECEBIMENTO": "2024-07-10",
+        "DATA_SAIDA": "2024-07-14",
+        "PECAS": [
+            {
+                "SERIAL": 147258,
+                "RECEBIDA": true,
+                "DIVERGENCIA": false,
+                "GARANTIA": true
+            },
+            {
+                "SERIAL": 258369,
+                "RECEBIDA": true,
+                "DIVERGENCIA": true,
+                "GARANTIA": false
+            },
+            {
+                "SERIAL": 369147,
+                "RECEBIDA": false,
+                "DIVERGENCIA": false,
+                "GARANTIA": true
+            },
+            {
+                "SERIAL": 741369,
+                "RECEBIDA": true,
+                "DIVERGENCIA": false,
+                "GARANTIA": true
+            },
+            {
+                "SERIAL": 852963,
+                "RECEBIDA": true,
+                "DIVERGENCIA": false,
+                "GARANTIA": true
+            }
+        ]
+    }
 ]
