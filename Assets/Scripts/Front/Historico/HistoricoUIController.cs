@@ -5,7 +5,7 @@ using System;
 
 public class HistoricoUIController : MonoBehaviour
 {
-    private const string DEFAULT_DATE_TEXT = "00/00/0000";
+    private const string DEFAULT_DATE_TEXT = ".......";
 
     [Header("JSON")]
     public TextAsset jsonFile;
@@ -16,6 +16,10 @@ public class HistoricoUIController : MonoBehaviour
     public GameObject miniTela;
     public TMP_Text dataRecebimentoText;
     public TMP_Text dataSaidaText;
+
+    [Header("Telas")]
+    public GameObject tela1;
+    public GameObject tela2;
 
     [Header("Ícones")]
     public Sprite concluidoIcon;
@@ -64,7 +68,9 @@ public class HistoricoUIController : MonoBehaviour
             TMP_Text rmaText = newItem.transform.Find("RMA_text")?.GetComponent<TMP_Text>();
             TMP_Text clienteText = newItem.transform.Find("Cliente_text")?.GetComponent<TMP_Text>();
             Image statusIcon = newItem.transform.Find("icon_status")?.GetComponent<Image>();
-            Button button = newItem.transform.Find("icon_plusInfo")?.GetComponent<Button>();
+
+            Button plusInfoButton = newItem.transform.Find("icon_plusInfo")?.GetComponent<Button>();
+            Button rmaButton = newItem.transform.Find("Button_rma")?.GetComponent<Button>();
 
             if (rmaText != null) rmaText.text = entry.RMA;
             if (clienteText != null) clienteText.text = entry.CLIENTE;
@@ -77,16 +83,18 @@ public class HistoricoUIController : MonoBehaviour
                 default: statusIcon.sprite = null; break;
             }
 
-            if (button != null)
+            if (plusInfoButton != null)
             {
-                HistoricoButton historicoButton = button.gameObject.AddComponent<HistoricoButton>();
-                historicoButton.entry = entry;
-                historicoButton.onClicked += HandleButtonClicked;
+                plusInfoButton.onClick.AddListener(() => HandleButtonClicked(entry));
+            }
+            if (rmaButton != null)
+            {
+                rmaButton.onClick.AddListener(() => TrocarTelas());
             }
         }
     }
 
-    private void HandleButtonClicked(HistoricoEntry entry)
+    public void HandleButtonClicked(HistoricoEntry entry)
     {
         string dataRecebimentoFormatada = FormatarData(entry.DATA_RECEBIMENTO);
 
@@ -105,13 +113,34 @@ public class HistoricoUIController : MonoBehaviour
         }
     }
 
+    public void TrocarTelas()
+    {
+        if (tela1 != null)
+        {
+            tela1.SetActive(false);
+        }
+        else
+        {
+            Debug.LogWarning("Tela 1 não atribuída!");
+        }
+
+        if (tela2 != null)
+        {
+            tela2.SetActive(true);
+        }
+        else
+        {
+            Debug.LogWarning("Tela 2 não atribuída!");
+        }
+    }
+
     private string FormatarData(string dataOriginal)
     {
         if (string.IsNullOrEmpty(dataOriginal))
         {
             return DEFAULT_DATE_TEXT;
         }
-        
+
         return dataOriginal.Replace(":", "/").Replace(";", "/").Replace(" ", "/");
     }
 }
