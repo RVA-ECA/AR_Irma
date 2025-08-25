@@ -17,10 +17,17 @@ public class HistoricoUIController : MonoBehaviour
     public TMP_Text dataRecebimentoText;
     public TMP_Text dataSaidaText;
 
+    [Header("Telas")]
+    public GameObject tela1;
+    public GameObject tela2;
+
+    [Header("Botões")]
+    public Button ReturnButton;
+
     [Header("Ícones")]
     public Sprite concluidoIcon;
     public Sprite naoRecebidoIcon;
-    public Sprite observacaoIcon;
+    public Sprite observacaoIcon; // Referência ao ícone restaurada
 
     [System.Serializable]
     public class HistoricoEntry
@@ -50,6 +57,11 @@ public class HistoricoUIController : MonoBehaviour
         HistoricoList historicoList = JsonUtility.FromJson<HistoricoList>(wrappedJson);
 
         DisplayHistorico(historicoList);
+
+        if (ReturnButton != null)
+        {
+            ReturnButton.onClick.AddListener(() => TrocarTelas(tela1, tela2));
+        }
     }
 
     public void DisplayHistorico(HistoricoList historicoLista)
@@ -64,7 +76,9 @@ public class HistoricoUIController : MonoBehaviour
             TMP_Text rmaText = newItem.transform.Find("RMA_text")?.GetComponent<TMP_Text>();
             TMP_Text clienteText = newItem.transform.Find("Cliente_text")?.GetComponent<TMP_Text>();
             Image statusIcon = newItem.transform.Find("icon_status")?.GetComponent<Image>();
-            Button button = newItem.transform.Find("icon_plusInfo")?.GetComponent<Button>();
+
+            Button plusInfoButton = newItem.transform.Find("icon_plusInfo")?.GetComponent<Button>();
+            Button rmaButton = newItem.transform.Find("Button_rma")?.GetComponent<Button>();
 
             if (rmaText != null) rmaText.text = entry.RMA;
             if (clienteText != null) clienteText.text = entry.CLIENTE;
@@ -77,16 +91,18 @@ public class HistoricoUIController : MonoBehaviour
                 default: statusIcon.sprite = null; break;
             }
 
-            if (button != null)
+            if (plusInfoButton != null)
             {
-                HistoricoButton historicoButton = button.gameObject.AddComponent<HistoricoButton>();
-                historicoButton.entry = entry;
-                historicoButton.onClicked += HandleButtonClicked;
+                plusInfoButton.onClick.AddListener(() => HandleButtonClicked(entry));
+            }
+            if (rmaButton != null)
+            {
+                rmaButton.onClick.AddListener(() => TrocarTelas(tela2, tela1));
             }
         }
     }
 
-    private void HandleButtonClicked(HistoricoEntry entry)
+    public void HandleButtonClicked(HistoricoEntry entry)
     {
         string dataRecebimentoFormatada = FormatarData(entry.DATA_RECEBIMENTO);
 
@@ -105,13 +121,25 @@ public class HistoricoUIController : MonoBehaviour
         }
     }
 
+    public void TrocarTelas(GameObject telaParaAtivar, GameObject telaParaDesativar)
+    {
+        if (telaParaDesativar != null)
+        {
+            telaParaDesativar.SetActive(false);
+        }
+        if (telaParaAtivar != null)
+        {
+            telaParaAtivar.SetActive(true);
+        }
+    }
+
     private string FormatarData(string dataOriginal)
     {
         if (string.IsNullOrEmpty(dataOriginal))
         {
             return DEFAULT_DATE_TEXT;
         }
-        
+
         return dataOriginal.Replace(":", "/").Replace(";", "/").Replace(" ", "/");
     }
 }
