@@ -8,7 +8,7 @@ public class Encostar_Dedo : MonoBehaviour
     private Button onClickButton;     // Botão que está no mesmo objeto (Objeto 1)
 
     private float distanceThreshold = 0.01f; // Distância para acionar o clique
-    private float resetThreshold = 0.05f;    // Distância para resetar a detecção (se o dedo se afastar)
+    private float resetThreshold = 0.02f;    // Distância para resetar a detecção (se o dedo se afastar)
 
     private bool acionado = false;    // Flag para garantir que o clique não aconteça várias vezes
 
