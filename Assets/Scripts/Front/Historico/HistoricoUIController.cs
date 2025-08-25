@@ -5,21 +5,23 @@ using System;
 
 public class HistoricoUIController : MonoBehaviour
 {
-    private const string DEFAULT_DATE_TEXT = "00/00/0000";
+    private const string DEFAULT_DATE_TEXT = "..........";
 
     [Header("JSON")]
     public TextAsset jsonFile;
 
     [Header("UI")]
-    public Transform contentContainer;
+    public Transform contentContainerHistorico;
     public GameObject historicoItemPrefab;
     public GameObject miniTela;
     public TMP_Text dataRecebimentoText;
     public TMP_Text dataSaidaText;
+    public GameObject RMAItemPrefab;
+    public Transform contentContainerRMA;
 
     [Header("Telas")]
-    public GameObject tela1;
-    public GameObject tela2;
+    public GameObject TelaHistorico;
+    public GameObject TelaRMA;
 
     [Header("Botões")]
     public Button ReturnButton;
@@ -27,7 +29,7 @@ public class HistoricoUIController : MonoBehaviour
     [Header("Ícones")]
     public Sprite concluidoIcon;
     public Sprite naoRecebidoIcon;
-    public Sprite observacaoIcon; // Referência ao ícone restaurada
+    public Sprite observacaoIcon;
 
     [System.Serializable]
     public class HistoricoEntry
@@ -60,18 +62,18 @@ public class HistoricoUIController : MonoBehaviour
 
         if (ReturnButton != null)
         {
-            ReturnButton.onClick.AddListener(() => TrocarTelas(tela1, tela2));
+            ReturnButton.onClick.AddListener(() => TrocarTelas(TelaHistorico, TelaRMA));
         }
     }
 
     public void DisplayHistorico(HistoricoList historicoLista)
     {
-        foreach (Transform child in contentContainer)
+        foreach (Transform child in contentContainerHistorico)
             Destroy(child.gameObject);
 
         foreach (HistoricoEntry entry in historicoLista.historico)
         {
-            GameObject newItem = Instantiate(historicoItemPrefab, contentContainer);
+            GameObject newItem = Instantiate(historicoItemPrefab, contentContainerHistorico);
 
             TMP_Text rmaText = newItem.transform.Find("RMA_text")?.GetComponent<TMP_Text>();
             TMP_Text clienteText = newItem.transform.Find("Cliente_text")?.GetComponent<TMP_Text>();
@@ -95,11 +97,34 @@ public class HistoricoUIController : MonoBehaviour
             {
                 plusInfoButton.onClick.AddListener(() => HandleButtonClicked(entry));
             }
+
             if (rmaButton != null)
             {
-                rmaButton.onClick.AddListener(() => TrocarTelas(tela2, tela1));
+                rmaButton.onClick.AddListener(() => ExibirDetalhesNaTela2(entry));
             }
         }
+    }
+
+    public void ExibirDetalhesNaTela2(HistoricoEntry entry)
+    {
+        foreach (Transform child in contentContainerRMA)
+            Destroy(child.gameObject);
+
+        GameObject newItem = Instantiate(RMAItemPrefab, contentContainerRMA);
+
+        TMP_Text rmaText = newItem.transform.Find("RMA_tela2_text")?.GetComponent<TMP_Text>();
+        TMP_Text clienteText = newItem.transform.Find("Cliente_tela2_text")?.GetComponent<TMP_Text>();
+        TMP_Text statusText = newItem.transform.Find("Status_tela2_text")?.GetComponent<TMP_Text>();
+        TMP_Text dataRecebimentoTela2Text = newItem.transform.Find("DataRecebimento_tela2_text")?.GetComponent<TMP_Text>();
+        TMP_Text dataSaidaTela2Text = newItem.transform.Find("DataSaida_tela2_text")?.GetComponent<TMP_Text>();
+
+        if (rmaText != null) rmaText.text = entry.RMA;
+        if (clienteText != null) clienteText.text = entry.CLIENTE;
+        if (statusText != null) statusText.text = $"Status: {entry.STATUS}";
+        if (dataRecebimentoTela2Text != null) dataRecebimentoTela2Text.text = $"Recebimento: {FormatarData(entry.DATA_RECEBIMENTO)}";
+        if (dataSaidaTela2Text != null) dataSaidaTela2Text.text = $"Saída: {FormatarData(entry.DATA_SAIDA)}";
+
+        TrocarTelas(TelaRMA, TelaHistorico);
     }
 
     public void HandleButtonClicked(HistoricoEntry entry)
@@ -116,8 +141,8 @@ public class HistoricoUIController : MonoBehaviour
 
             string dataSaidaFormatada = FormatarData(entry.DATA_SAIDA);
 
-            dataRecebimentoText.text = $"recebimento\n({dataRecebimentoFormatada})";
-            dataSaidaText.text = $"saída\n({dataSaidaFormatada})";
+            dataRecebimentoText.text = $"Recebimento: {dataRecebimentoFormatada}";
+            dataSaidaText.text = $"Saída: {dataSaidaFormatada}";
         }
     }
 
