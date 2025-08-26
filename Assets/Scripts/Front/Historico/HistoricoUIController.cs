@@ -26,10 +26,30 @@ public class HistoricoUIController : MonoBehaviour
     [Header("Botões")]
     public Button ReturnButton;
 
-    [Header("Ícones")]
+    [Header("Ícones Historico")]
     public Sprite concluidoIcon;
     public Sprite naoRecebidoIcon;
     public Sprite observacaoIcon;
+
+    [Header("Ícones RMA")]
+    public Sprite AtivadoIcon;  
+    public Sprite desativadoIcon;  
+
+    public Sprite GarantiaAtivaIcon;    
+    public Sprite GarantiaInativaIcon; 
+
+    public Sprite ComentarioAtivoIcon;  
+    public Sprite ComentarioInativoIcon; 
+
+
+    [System.Serializable]
+    public class Peca
+    {
+        public int SERIAL;
+        public bool RECEBIDA;
+        public bool DIVERGENCIA;
+        public bool GARANTIA;
+    }
 
     [System.Serializable]
     public class HistoricoEntry
@@ -39,6 +59,7 @@ public class HistoricoUIController : MonoBehaviour
         public string STATUS;
         public string DATA_RECEBIMENTO;
         public string DATA_SAIDA;
+        public Peca[] PECAS;
     }
 
     [System.Serializable]
@@ -47,24 +68,33 @@ public class HistoricoUIController : MonoBehaviour
         public HistoricoEntry[] historico;
     }
 
+
     void Start()
     {
-        if (jsonFile == null || historicoItemPrefab == null)
+        if (jsonFile == null || historicoItemPrefab == null || RMAItemPrefab == null)
         {
             Debug.LogError("JSON ou prefab não atribuído!");
             return;
         }
 
-        string wrappedJson = "{ \"historico\": " + jsonFile.text + "}";
+        string wrappedJson = "{ \"historico\": " + jsonFile.text + "}"; 
         HistoricoList historicoList = JsonUtility.FromJson<HistoricoList>(wrappedJson);
 
-        DisplayHistorico(historicoList);
+        if (historicoList != null && historicoList.historico != null)
+        {
+            DisplayHistorico(historicoList);
+        }
+        else
+        {
+            Debug.LogError("Falha ao carregar o JSON ou lista de histórico vazia.");
+        }
 
         if (ReturnButton != null)
         {
             ReturnButton.onClick.AddListener(() => TrocarTelas(TelaHistorico, TelaRMA));
         }
     }
+
 
     public void DisplayHistorico(HistoricoList historicoLista)
     {
@@ -107,9 +137,11 @@ public class HistoricoUIController : MonoBehaviour
 
     public void ExibirDetalhesNaTela2(HistoricoEntry entry)
     {
+        // Limpar os itens atuais na tela de RMA
         foreach (Transform child in contentContainerRMA)
             Destroy(child.gameObject);
 
+        // Exibir as informações do RMA principal (caso precise)
         GameObject newItem = Instantiate(RMAItemPrefab, contentContainerRMA);
 
         TMP_Text rmaText = newItem.transform.Find("RMA_tela2_text")?.GetComponent<TMP_Text>();
@@ -124,8 +156,46 @@ public class HistoricoUIController : MonoBehaviour
         if (dataRecebimentoTela2Text != null) dataRecebimentoTela2Text.text = $"Recebimento: {FormatarData(entry.DATA_RECEBIMENTO)}";
         if (dataSaidaTela2Text != null) dataSaidaTela2Text.text = $"Saída: {FormatarData(entry.DATA_SAIDA)}";
 
+        // Exibir as peças
+        foreach (var peca in entry.PECAS)
+        {
+            // Instancia a célula para exibir a peça
+            GameObject newPecaItem = Instantiate(RMAItemPrefab, contentContainerRMA);
+
+            // Texto Serial
+            TMP_Text serialText = newPecaItem.transform.Find("rmaSerial_text")?.GetComponent<TMP_Text>();
+
+            // Ícones para os estados
+            Image toggleReceive = newPecaItem.transform.Find("icon_toggleReceive")?.GetComponent<Image>();
+            Image toggleDivergence = newPecaItem.transform.Find("icon_toggleDivergence")?.GetComponent<Image>();
+            Image rmaWarranty = newPecaItem.transform.Find("icon_rmaWarranty")?.GetComponent<Image>();
+            Image rmaComents = newPecaItem.transform.Find("icon_rmaComents")?.GetComponent<Image>();
+
+            // Definir Serial
+            if (serialText != null) serialText.text = $"Serial: {peca.SERIAL}";
+
+            // Ícones de acordo com o valor dos atributos
+            if (toggleReceive != null)
+                toggleReceive.sprite = peca.RECEBIDA ? AtivadoIcon : desativadoIcon;
+
+            if (toggleDivergence != null)
+                toggleDivergence.sprite = peca.DIVERGENCIA ? AtivadoIcon : desativadoIcon;
+
+            if (rmaWarranty != null)
+                rmaWarranty.sprite = peca.GARANTIA ? GarantiaAtivaIcon : GarantiaInativaIcon;
+
+            // Para o ícone de comentários, você pode fazer algo similar, por exemplo, se a peça tiver algum comentário.
+            if (rmaComents != null)
+                rmaComents.sprite = peca.DIVERGENCIA ? ComentarioAtivoIcon : ComentarioInativoIcon;
+        }
+
+        // Trocar para a Tela RMA
         TrocarTelas(TelaRMA, TelaHistorico);
     }
+
+
+
+
 
     public void HandleButtonClicked(HistoricoEntry entry)
     {
