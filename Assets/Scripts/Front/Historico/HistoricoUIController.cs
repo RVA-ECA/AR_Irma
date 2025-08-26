@@ -18,6 +18,8 @@ public class HistoricoUIController : MonoBehaviour
     public TMP_Text dataSaidaText;
     public GameObject RMAItemPrefab;
     public Transform contentContainerRMA;
+    public GameObject RMAITittlePrefab;
+    public Transform TittleRMA;
 
     [Header("Telas")]
     public GameObject TelaHistorico;
@@ -32,15 +34,14 @@ public class HistoricoUIController : MonoBehaviour
     public Sprite observacaoIcon;
 
     [Header("Ícones RMA")]
-    public Sprite AtivadoIcon;  
-    public Sprite desativadoIcon;  
+    public Sprite AtivadoIcon;
+    public Sprite desativadoIcon;
 
-    public Sprite GarantiaAtivaIcon;    
-    public Sprite GarantiaInativaIcon; 
+    public Sprite GarantiaAtivaIcon;
+    public Sprite GarantiaInativaIcon;
 
-    public Sprite ComentarioAtivoIcon;  
-    public Sprite ComentarioInativoIcon; 
-
+    public Sprite ComentarioAtivoIcon;
+    public Sprite ComentarioInativoIcon;
 
     [System.Serializable]
     public class Peca
@@ -59,6 +60,8 @@ public class HistoricoUIController : MonoBehaviour
         public string STATUS;
         public string DATA_RECEBIMENTO;
         public string DATA_SAIDA;
+        public string CATEGORIA;
+        public string TIPO;
         public Peca[] PECAS;
     }
 
@@ -68,7 +71,6 @@ public class HistoricoUIController : MonoBehaviour
         public HistoricoEntry[] historico;
     }
 
-
     void Start()
     {
         if (jsonFile == null || historicoItemPrefab == null || RMAItemPrefab == null)
@@ -77,7 +79,7 @@ public class HistoricoUIController : MonoBehaviour
             return;
         }
 
-        string wrappedJson = "{ \"historico\": " + jsonFile.text + "}"; 
+        string wrappedJson = "{ \"historico\": " + jsonFile.text + "}";
         HistoricoList historicoList = JsonUtility.FromJson<HistoricoList>(wrappedJson);
 
         if (historicoList != null && historicoList.historico != null)
@@ -94,7 +96,6 @@ public class HistoricoUIController : MonoBehaviour
             ReturnButton.onClick.AddListener(() => TrocarTelas(TelaHistorico, TelaRMA));
         }
     }
-
 
     public void DisplayHistorico(HistoricoList historicoLista)
     {
@@ -137,65 +138,76 @@ public class HistoricoUIController : MonoBehaviour
 
     public void ExibirDetalhesNaTela2(HistoricoEntry entry)
     {
-        // Limpar os itens atuais na tela de RMA
         foreach (Transform child in contentContainerRMA)
-            Destroy(child.gameObject);
+        {
+            if (child.name != "RMA_Titulo")
+                Destroy(child.gameObject);
+        }
 
-        // Exibir as informações do RMA principal (caso precise)
-        GameObject newItem = Instantiate(RMAItemPrefab, contentContainerRMA);
+        ExibirTituloRMA(entry);
 
-        TMP_Text rmaText = newItem.transform.Find("RMA_tela2_text")?.GetComponent<TMP_Text>();
-        TMP_Text clienteText = newItem.transform.Find("Cliente_tela2_text")?.GetComponent<TMP_Text>();
-        TMP_Text statusText = newItem.transform.Find("Status_tela2_text")?.GetComponent<TMP_Text>();
-        TMP_Text dataRecebimentoTela2Text = newItem.transform.Find("DataRecebimento_tela2_text")?.GetComponent<TMP_Text>();
-        TMP_Text dataSaidaTela2Text = newItem.transform.Find("DataSaida_tela2_text")?.GetComponent<TMP_Text>();
-
-        if (rmaText != null) rmaText.text = entry.RMA;
-        if (clienteText != null) clienteText.text = entry.CLIENTE;
-        if (statusText != null) statusText.text = $"Status: {entry.STATUS}";
-        if (dataRecebimentoTela2Text != null) dataRecebimentoTela2Text.text = $"Recebimento: {FormatarData(entry.DATA_RECEBIMENTO)}";
-        if (dataSaidaTela2Text != null) dataSaidaTela2Text.text = $"Saída: {FormatarData(entry.DATA_SAIDA)}";
-
-        // Exibir as peças
         foreach (var peca in entry.PECAS)
         {
-            // Instancia a célula para exibir a peça
             GameObject newPecaItem = Instantiate(RMAItemPrefab, contentContainerRMA);
 
-            // Texto Serial
             TMP_Text serialText = newPecaItem.transform.Find("rmaSerial_text")?.GetComponent<TMP_Text>();
 
-            // Ícones para os estados
             Image toggleReceive = newPecaItem.transform.Find("icon_toggleReceive")?.GetComponent<Image>();
             Image toggleDivergence = newPecaItem.transform.Find("icon_toggleDivergence")?.GetComponent<Image>();
             Image rmaWarranty = newPecaItem.transform.Find("icon_rmaWarranty")?.GetComponent<Image>();
             Image rmaComents = newPecaItem.transform.Find("icon_rmaComents")?.GetComponent<Image>();
 
-            // Definir Serial
             if (serialText != null) serialText.text = $"Serial: {peca.SERIAL}";
 
-            // Ícones de acordo com o valor dos atributos
-            if (toggleReceive != null)
-                toggleReceive.sprite = peca.RECEBIDA ? AtivadoIcon : desativadoIcon;
-
-            if (toggleDivergence != null)
-                toggleDivergence.sprite = peca.DIVERGENCIA ? AtivadoIcon : desativadoIcon;
-
-            if (rmaWarranty != null)
-                rmaWarranty.sprite = peca.GARANTIA ? GarantiaAtivaIcon : GarantiaInativaIcon;
-
-            // Para o ícone de comentários, você pode fazer algo similar, por exemplo, se a peça tiver algum comentário.
-            if (rmaComents != null)
-                rmaComents.sprite = peca.DIVERGENCIA ? ComentarioAtivoIcon : ComentarioInativoIcon;
+            ConfigurarIcone(toggleReceive, peca.RECEBIDA, AtivadoIcon, desativadoIcon);
+            ConfigurarIcone(toggleDivergence, peca.DIVERGENCIA, AtivadoIcon, desativadoIcon);
+            ConfigurarIcone(rmaWarranty, peca.GARANTIA, GarantiaAtivaIcon, GarantiaInativaIcon);
+            ConfigurarIcone(rmaComents, peca.DIVERGENCIA, ComentarioAtivoIcon, ComentarioInativoIcon);
         }
 
-        // Trocar para a Tela RMA
         TrocarTelas(TelaRMA, TelaHistorico);
     }
 
+    private void ConfigurarIcone(Image icon, bool condition, Sprite ativo, Sprite inativo)
+    {
+        if (icon != null)
+        {
+            icon.sprite = condition ? ativo : inativo;
+        }
+    }
 
+    private void ExibirTituloRMA(HistoricoEntry entry)
+    {
+        Transform tituloExistente = TittleRMA.Find("RMA_Titulo");
+        if (tituloExistente == null)
+        {
+            GameObject newItem = Instantiate(RMAITittlePrefab, TittleRMA);
 
+            newItem.name = "RMA_Titulo";
 
+            TMP_Text requestText = newItem.transform.Find("request_txt")?.GetComponent<TMP_Text>();
+            TMP_Text categoryText = newItem.transform.Find("category_txt")?.GetComponent<TMP_Text>();
+            TMP_Text clientText = newItem.transform.Find("client_txt")?.GetComponent<TMP_Text>();
+            TMP_Text typeText = newItem.transform.Find("type_txt")?.GetComponent<TMP_Text>();
+
+            if (requestText != null) requestText.text = entry.RMA;
+            if (categoryText != null) categoryText.text = entry.CLIENTE;
+            if (clientText != null) clientText.text = entry.CATEGORIA;
+            if (typeText != null) typeText.text = entry.TIPO;
+        }
+        else
+        {
+            TMP_Text requestText = tituloExistente.Find("request_txt")?.GetComponent<TMP_Text>();
+            TMP_Text categoryText = tituloExistente.Find("category_txt")?.GetComponent<TMP_Text>();
+            TMP_Text clientText = tituloExistente.Find("client_txt")?.GetComponent<TMP_Text>();
+            TMP_Text typeText = tituloExistente.Find("type_txt")?.GetComponent<TMP_Text>();
+
+            if (requestText != null) requestText.text = entry.RMA;
+            if (categoryText != null) categoryText.text = entry.CLIENTE;
+            if (clientText != null) clientText.text = entry.CATEGORIA;
+            if (typeText != null) typeText.text = entry.TIPO;
+        }
+    }
 
     public void HandleButtonClicked(HistoricoEntry entry)
     {
