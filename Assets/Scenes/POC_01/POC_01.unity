@@ -234,7 +234,7 @@ MonoBehaviour:
   GarantiaAtivaIcon: {fileID: 21300000, guid: 40aa2ebf03824d245965fdc140ead561, type: 3}
   GarantiaInativaIcon: {fileID: 21300000, guid: 54bd3281e6ba3724da10c65e82754237, type: 3}
   ComentarioAtivoIcon: {fileID: 21300000, guid: 57b683cc7689aaa4f8cde4abb6047847, type: 3}
-  ComentarioInativoIcon: {fileID: 0}
+  ComentarioInativoIcon: {fileID: 21300000, guid: c0d5633cb85b9a5448abc1e9775a187a, type: 3}
 --- !u!4 &291688815
 Transform:
   m_ObjectHideFlags: 0
