@@ -405,29 +405,6 @@ MonoBehaviour:
   GarantiaInativaIcon: {fileID: 21300000, guid: 54bd3281e6ba3724da10c65e82754237, type: 3}
   ComentarioAtivoIcon: {fileID: 21300000, guid: 57b683cc7689aaa4f8cde4abb6047847, type: 3}
   ComentarioInativoIcon: {fileID: 0}
---- !u!1 &939936541 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2737134200543219123, guid: f6d7989d85c475945b521afde5a1cc03, type: 3}
-  m_PrefabInstance: {fileID: 1972774289}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &939936546
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 939936541}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0c9ff6e974c69d4883a738c0cdb05b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  indicadorTag: Indicador
-  polegarTag: Polegar
-  pinchThreshold: 0.03
-  clickThreshold: 0.01
-  resetThreshold: 0.02
-  scrollSensibilidade: 3
 --- !u!1 &1174661390
 GameObject:
   m_ObjectHideFlags: 0
@@ -995,10 +972,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2737134200543219123, guid: f6d7989d85c475945b521afde5a1cc03, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 939936546}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f6d7989d85c475945b521afde5a1cc03, type: 3}
 --- !u!224 &1972774290 stripped
 RectTransform:

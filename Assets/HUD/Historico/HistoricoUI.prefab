@@ -162,7 +162,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &433946956745236862
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -305,7 +305,7 @@ MonoBehaviour:
   pinchThreshold: 0.03
   clickThreshold: 0.01
   resetThreshold: 0.02
-  scrollSensibilidade: 3
+  scrollSensibilidade: -1000
 --- !u!1 &2966538146968488036
 GameObject:
   m_ObjectHideFlags: 0
