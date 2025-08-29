@@ -354,6 +354,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 6710010042612739246, guid: f6d7989d85c475945b521afde5a1cc03, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7289356502005956814, guid: f6d7989d85c475945b521afde5a1cc03, type: 3}
       propertyPath: m_Name
       value: Saida
@@ -1418,14 +1422,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jsonFile: {fileID: 4900000, guid: 625a68fee06702743b6aa134c258602a, type: 3}
-  contentContainer: {fileID: 1999384525}
+  contentContainerHistorico: {fileID: 0}
   historicoItemPrefab: {fileID: 5403528783225911108, guid: 7f0be3f76582a1d4f818fd3079cf89e1, type: 3}
   miniTela: {fileID: 1869456752}
   dataRecebimentoText: {fileID: 994317746}
   dataSaidaText: {fileID: 2103824055}
+  RMAItemPrefab: {fileID: 0}
+  contentContainerRMA: {fileID: 0}
+  RMAITittlePrefab: {fileID: 0}
+  TittleRMA: {fileID: 0}
+  TelaHistorico: {fileID: 0}
+  TelaRMA: {fileID: 0}
+  ReturnButton: {fileID: 0}
   concluidoIcon: {fileID: 21300000, guid: 40aa2ebf03824d245965fdc140ead561, type: 3}
   naoRecebidoIcon: {fileID: 21300000, guid: c0d5633cb85b9a5448abc1e9775a187a, type: 3}
   observacaoIcon: {fileID: 21300000, guid: 54bd3281e6ba3724da10c65e82754237, type: 3}
+  AtivadoIcon: {fileID: 0}
+  desativadoIcon: {fileID: 0}
+  GarantiaAtivaIcon: {fileID: 0}
+  GarantiaInativaIcon: {fileID: 0}
+  ComentarioAtivoIcon: {fileID: 0}
+  ComentarioInativoIcon: {fileID: 0}
 --- !u!4 &1859875819
 Transform:
   m_ObjectHideFlags: 0
@@ -1444,11 +1461,6 @@ Transform:
 --- !u!1 &1869456752 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 761061705165736025, guid: f6d7989d85c475945b521afde5a1cc03, type: 3}
-  m_PrefabInstance: {fileID: 44747506}
-  m_PrefabAsset: {fileID: 0}
---- !u!224 &1999384525 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 2790336080287731984, guid: f6d7989d85c475945b521afde5a1cc03, type: 3}
   m_PrefabInstance: {fileID: 44747506}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &2103824055 stripped
