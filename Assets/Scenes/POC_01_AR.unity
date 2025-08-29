@@ -122,6 +122,34 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!224 &73792440 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 8925057882244221356, guid: d31b461c257f5fa4cb6bf3d8871a321c, type: 3}
+  m_PrefabInstance: {fileID: 1831764703}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &212740558 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2018960912705134156, guid: d31b461c257f5fa4cb6bf3d8871a321c, type: 3}
+  m_PrefabInstance: {fileID: 1831764703}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &212740563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 212740558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0c9ff6e974c69d4883a738c0cdb05b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  indicadorTag: Indicador
+  polegarTag: Polegar
+  pinchThreshold: 0.03
+  clickThreshold: 0.01
+  resetThreshold: 0.02
+  scrollSensibilidade: 3
 --- !u!1 &553658495
 GameObject:
   m_ObjectHideFlags: 0
@@ -362,13 +390,21 @@ MonoBehaviour:
   dataRecebimentoText: {fileID: 1972774293}
   dataSaidaText: {fileID: 1972774292}
   RMAItemPrefab: {fileID: 5403528783225911108, guid: c4de657ae1b55b9429993a711b372828, type: 3}
-  contentContainerRMA: {fileID: 1831764707}
+  contentContainerRMA: {fileID: 73792440}
+  RMAITittlePrefab: {fileID: 5403528783225911108, guid: 82ce78286ef0bbf41a3c2f4b591d2b0d, type: 3}
+  TittleRMA: {fileID: 1841368162}
   TelaHistorico: {fileID: 1972774291}
   TelaRMA: {fileID: 1831764706}
   ReturnButton: {fileID: 1831764705}
   concluidoIcon: {fileID: 21300000, guid: 40aa2ebf03824d245965fdc140ead561, type: 3}
   naoRecebidoIcon: {fileID: 21300000, guid: c0d5633cb85b9a5448abc1e9775a187a, type: 3}
   observacaoIcon: {fileID: 21300000, guid: 54bd3281e6ba3724da10c65e82754237, type: 3}
+  AtivadoIcon: {fileID: 21300000, guid: 2eb740d8ad8bc9947b969d463c31e6a7, type: 3}
+  desativadoIcon: {fileID: 21300000, guid: 94d333ac34fe9844ab6f7ef1686e023e, type: 3}
+  GarantiaAtivaIcon: {fileID: 21300000, guid: 40aa2ebf03824d245965fdc140ead561, type: 3}
+  GarantiaInativaIcon: {fileID: 21300000, guid: 54bd3281e6ba3724da10c65e82754237, type: 3}
+  ComentarioAtivoIcon: {fileID: 21300000, guid: 57b683cc7689aaa4f8cde4abb6047847, type: 3}
+  ComentarioInativoIcon: {fileID: 0}
 --- !u!1 &1174661390
 GameObject:
   m_ObjectHideFlags: 0
@@ -539,7 +575,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4355778982952038399, guid: b3ebae9ce70090a489063820ee970103, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -14.09
       objectReference: {fileID: 0}
     - target: {fileID: 4355778982952038399, guid: b3ebae9ce70090a489063820ee970103, type: 3}
       propertyPath: m_LocalPosition.y
@@ -767,6 +803,9 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2018960912705134156, guid: d31b461c257f5fa4cb6bf3d8871a321c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 212740563}
     - targetCorrespondingSourceObject: {fileID: 3638807275209978679, guid: d31b461c257f5fa4cb6bf3d8871a321c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1867675141}
@@ -792,9 +831,9 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 982890984737666879, guid: d31b461c257f5fa4cb6bf3d8871a321c, type: 3}
   m_PrefabInstance: {fileID: 1831764703}
   m_PrefabAsset: {fileID: 0}
---- !u!224 &1831764707 stripped
+--- !u!224 &1841368162 stripped
 RectTransform:
-  m_CorrespondingSourceObject: {fileID: 7712985624338120222, guid: d31b461c257f5fa4cb6bf3d8871a321c, type: 3}
+  m_CorrespondingSourceObject: {fileID: 3015068057343058276, guid: d31b461c257f5fa4cb6bf3d8871a321c, type: 3}
   m_PrefabInstance: {fileID: 1831764703}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1867675137 stripped
