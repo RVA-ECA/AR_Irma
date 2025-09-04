@@ -1,60 +1,42 @@
-    using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 
-public class Encostar_Dedo : MonoBehaviour
+public class Encostar_Dedo_Collider : MonoBehaviour
 {
-    private GameObject object1;        // O objeto onde o script está (Objeto 1)
-    private GameObject object2;       // Objeto com tag "Indicador" (Dedo ou indicador)
-    private Button onClickButton;     // Botão que está no mesmo objeto (Objeto 1)
-
-    private float distanceThreshold = 0.01f; // Distância para acionar o clique
-    private float resetThreshold = 0.02f;    // Distância para resetar a detecção (se o dedo se afastar)
-
-    private bool acionado = false;    // Flag para garantir que o clique não aconteça várias vezes
+    private Button onClickButton; // Botão que está no mesmo objeto
 
     void Awake()
     {
-        // Puxa o próprio objeto (Objeto 1) onde o script está
-        object1 = gameObject;
-
-        // Puxa o componente Button do mesmo objeto (se existir)
+        // Puxa o componente Button do mesmo objeto
         onClickButton = GetComponent<Button>();
 
         if (onClickButton == null)
         {
-            Debug.LogWarning("Nenhum Button encontrado neste objeto. Adicione um componente Button se quiser usar o clique.");
-        }
-
-        // Procura o objeto com a tag "Indicador" (o dedo)
-        object2 = GameObject.FindGameObjectWithTag("Indicador");
-
-        if (object2 == null)
-        {
-            Debug.LogError("Nenhum objeto com a tag 'Indicador' foi encontrado na cena!");
+            Debug.LogWarning("Nenhum componente Button encontrado neste objeto.");
         }
     }
 
-    void Update()
+    // Chamado quando outro colisor entra no trigger deste objeto
+    private void OnTriggerEnter(Collider other)
     {
-        if (object2 == null || onClickButton == null) return;
-
-        // Calcula a distância entre o dedo (object2) e o objeto (object1)
-        float distance = Vector3.Distance(object1.transform.position, object2.transform.position);
-        Debug.Log($"Distância: {distance}");
-
-        // Quando a distância for menor que o limiar, aciona o clique
-        if (!acionado && distance < distanceThreshold)
+        // Verifica se o objeto que colidiu tem a tag "Indicador"
+        if (other.CompareTag("Indicador"))
         {
-            Debug.Log("Acionou o clique no botão!");
-            // Dispara o evento de clique no próprio botão
-            onClickButton.onClick.Invoke();
-            acionado = true; // Impede múltiplos acionamentos
+            // Dispara o evento de clique do botão
+            if (onClickButton != null)
+            {
+                onClickButton.onClick.Invoke();
+                Debug.Log("Colisão detectada! Clicando no botão.");
+            }
         }
-        else if (acionado && distance > resetThreshold)
+    }
+
+    // Opcional: Para feedback visual, você pode usar o OnTriggerExit
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Indicador"))
         {
-            // Se a distância aumentar além do limiar, reseta a detecção
-            Debug.Log("Resetado, pronto para acionar novamente.");
-            acionado = false; // Permite novo acionamento
+            Debug.Log("Indicador saiu da colisão. Pronto para novo clique.");
         }
     }
 }
