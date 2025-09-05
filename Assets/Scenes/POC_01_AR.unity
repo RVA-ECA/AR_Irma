@@ -387,8 +387,6 @@ MonoBehaviour:
   contentContainerHistorico: {fileID: 1972774295}
   historicoItemPrefab: {fileID: 5403528783225911108, guid: 7f0be3f76582a1d4f818fd3079cf89e1, type: 3}
   miniTela: {fileID: 1972774294}
-  dataRecebimentoText: {fileID: 1972774293}
-  dataSaidaText: {fileID: 1972774292}
   RMAItemPrefab: {fileID: 5403528783225911108, guid: c4de657ae1b55b9429993a711b372828, type: 3}
   contentContainerRMA: {fileID: 73792440}
   RMAITittlePrefab: {fileID: 5403528783225911108, guid: 82ce78286ef0bbf41a3c2f4b591d2b0d, type: 3}
@@ -988,28 +986,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1788379355796347318, guid: f6d7989d85c475945b521afde5a1cc03, type: 3}
   m_PrefabInstance: {fileID: 1972774289}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1972774292 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 396282753781670096, guid: f6d7989d85c475945b521afde5a1cc03, type: 3}
-  m_PrefabInstance: {fileID: 1972774289}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1972774293 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9083923489445318038, guid: f6d7989d85c475945b521afde5a1cc03, type: 3}
-  m_PrefabInstance: {fileID: 1972774289}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1972774294 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 761061705165736025, guid: f6d7989d85c475945b521afde5a1cc03, type: 3}

@@ -18,8 +18,6 @@ public class HistoricoUIController : MonoBehaviour
     public Transform contentContainerHistorico;
     public GameObject historicoItemPrefab;
     public GameObject miniTela;
-    public TMP_Text dataRecebimentoText;
-    public TMP_Text dataSaidaText;
     public GameObject RMAItemPrefab;
     public Transform contentContainerRMA;
     public GameObject RMAITittlePrefab;
@@ -57,6 +55,7 @@ public class HistoricoUIController : MonoBehaviour
         public bool RECEBIDA;
         public bool DIVERGENCIA;
         public bool GARANTIA;
+        public string COMENTARIO;
     }
 
     [System.Serializable]
@@ -131,9 +130,26 @@ public class HistoricoUIController : MonoBehaviour
                 default: statusIcon.sprite = null; break;
             }
 
+            // 👉 Inicializa a TelaInfo com as datas já formatadas
+            Transform telaInfo = newItem.transform.Find("TelaInfo");
+            if (telaInfo != null)
+            {
+                TMP_Text recebimentoText = telaInfo.Find("Recebimento")?.GetComponent<TMP_Text>();
+                TMP_Text saidaText = telaInfo.Find("Saida")?.GetComponent<TMP_Text>();
+
+                if (recebimentoText != null)
+                    recebimentoText.text = $"Recebimento: {FormatarData(entry.DATA_RECEBIMENTO)}";
+
+                if (saidaText != null)
+                    saidaText.text = $"Saída: {FormatarData(entry.DATA_SAIDA)}";
+
+                // Deixa oculta até o usuário clicar
+                telaInfo.gameObject.SetActive(false);
+            }
+
             if (plusInfoButton != null)
             {
-                plusInfoButton.onClick.AddListener(() => HandleButtonClicked(entry));
+                plusInfoButton.onClick.AddListener(() => HandleButtonClicked(entry, newItem));
             }
 
             if (rmaButton != null)
@@ -167,6 +183,21 @@ public class HistoricoUIController : MonoBehaviour
             Image toggleGarantia = newPecaItem.transform.Find("icon_rmaWarranty")?.GetComponent<Image>();
             Image comentarioImage = newPecaItem.transform.Find("icon_rmaComents")?.GetComponent<Image>();
 
+            Transform telaComentario = newPecaItem.transform.Find("TelaComentario");
+            if (telaComentario != null)
+                telaComentario.gameObject.SetActive(false); // começa oculto
+
+            TMP_InputField comentarioInput = telaComentario?.Find("ComentarioInput")?.GetComponent<TMP_InputField>();
+
+            if (comentarioInput != null)
+            {
+                comentarioInput.onEndEdit.AddListener((texto) =>
+                {
+                    peca.COMENTARIO = texto;
+                    AtualizarPeca(entry, peca.SERIAL);
+                });
+            }
+
             // Atualiza textos
             if (serialText != null)
                 serialText.text = $"Serial: {peca.SERIAL}";
@@ -194,12 +225,32 @@ public class HistoricoUIController : MonoBehaviour
             {
                 divergenceButton.onClick.AddListener(() =>
                 {
+                    // Fecha o menu de comentário, caso esteja aberto
+                    if (telaComentario != null && telaComentario.gameObject.activeSelf)
+                    {
+                        telaComentario.gameObject.SetActive(false);
+                    }
+
                     peca.DIVERGENCIA = !peca.DIVERGENCIA; // Atualiza estado
                     ConfigurarIcone(toggleDivergence, peca.DIVERGENCIA, AtivadoIcon, desativadoIcon);
                     ConfigurarIcone(comentarioImage, peca.DIVERGENCIA, ComentarioAtivoIcon, ComentarioInativoIcon);
                     AtualizarPeca(entry, peca.SERIAL, divergencia: peca.DIVERGENCIA);
+
                 });
             }
+
+            Button comentarioButton = comentarioImage?.GetComponent<Button>();
+            if (comentarioButton != null && telaComentario != null)
+            {
+                comentarioButton.onClick.AddListener(() =>
+                {
+                    if (peca.DIVERGENCIA) // Só permite abrir se divergência estiver ativa
+                    {
+                        telaComentario.gameObject.SetActive(!telaComentario.gameObject.activeSelf);
+                    }
+                });
+            }
+
         }
 
         // Troca telas
@@ -273,24 +324,37 @@ public class HistoricoUIController : MonoBehaviour
         }
     }
 
-    public void HandleButtonClicked(HistoricoEntry entry)
+    public void HandleButtonClicked(HistoricoEntry entry, GameObject itemPrefab)
     {
-        string dataRecebimentoFormatada = FormatarData(entry.DATA_RECEBIMENTO);
+        Debug.Log("Botão Info clicado!"); // <-- Aqui
+        Transform telaInfo = itemPrefab.transform.Find("TelaInfo");
+        if (telaInfo == null) return;
 
-        if (miniTela.activeSelf && dataRecebimentoText.text.Contains(dataRecebimentoFormatada))
+        GameObject telaInfoObj = telaInfo.gameObject;
+
+        TMP_Text recebimentoText = telaInfo.Find("Recebimento")?.GetComponent<TMP_Text>();
+        TMP_Text saidaText = telaInfo.Find("Saida")?.GetComponent<TMP_Text>();
+
+        string dataRecebimentoFormatada = FormatarData(entry.DATA_RECEBIMENTO);
+        string dataSaidaFormatada = FormatarData(entry.DATA_SAIDA);
+
+        if (telaInfoObj.activeSelf && recebimentoText != null && recebimentoText.text.Contains(dataRecebimentoFormatada))
         {
-            miniTela.SetActive(false);
+            telaInfoObj.SetActive(false);
+            Debug.Log("Tela Ocultada");
         }
         else
         {
-            miniTela.SetActive(true);
+            Debug.Log("Tela Exibida"); 
+            telaInfoObj.SetActive(true);
 
-            string dataSaidaFormatada = FormatarData(entry.DATA_SAIDA);
-
-            dataRecebimentoText.text = $"Recebimento: {dataRecebimentoFormatada}";
-            dataSaidaText.text = $"Saída: {dataSaidaFormatada}";
+            if (recebimentoText != null)
+                recebimentoText.text = $"Recebimento: {dataRecebimentoFormatada}";
+            if (saidaText != null)
+                saidaText.text = $"Saída: {dataSaidaFormatada}";
         }
     }
+
 
     public void TrocarTelas(GameObject telaParaAtivar, GameObject telaParaDesativar)
     {
