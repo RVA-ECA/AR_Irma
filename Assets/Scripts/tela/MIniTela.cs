@@ -5,7 +5,7 @@ public class Minitela : MonoBehaviour
 {
     public GameObject Tela;  // A tela que será ativada/desativada
 
-    private HashSet<string> dedosEsperados = new HashSet<string> { "Indicador", "Medio", "Anelar", "Mindinho" };
+    private HashSet<string> dedosEsperados = new HashSet<string> { "Indicador", "Medio", "Anelar"};
     private HashSet<string> dedosDetectados = new HashSet<string>();  // Dedos que estão em contato com o objeto
 
     private bool menuAtivado = false;  // Controle do estado do menu

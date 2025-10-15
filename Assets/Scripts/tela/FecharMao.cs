@@ -10,7 +10,7 @@ public class FecharMao : MonoBehaviour
     private bool MenuAtivado = true;
     private bool menuTravado = false;
 
-    private HashSet<string> dedosEsperados = new HashSet<string> { "Indicador", "Medio", "Anelar", "Mindinho" };
+    private HashSet<string> dedosEsperados = new HashSet<string> { "Indicador", "Medio", "Anelar" };
     private HashSet<string> dedosDetectados = new HashSet<string>();
 
     private void OnTriggerEnter(Collider other)
