@@ -1,100 +1,78 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Collections.Generic;
 
-public class EncostarListaScrollPinça : MonoBehaviour
+public class PinchScrollAuto : MonoBehaviour
 {
     [Header("Configurações")]
-    public string indicadorTag = "Indicador";
-    public string polegarTag = "Polegar";      // Novo: objeto do polegar
-    public float pinchThreshold = 0.03f;       // Distância máxima para considerar pinça
-    public float clickThreshold = 0.01f;       // Distância mínima para clique
-    public float resetThreshold = 0.02f;       // Distância para resetar clique
-    public float scrollSensibilidade = 3f;     // Velocidade de scroll
+    public string indicadorTag = "IndicadorR"; // Tag do dedo indicador
+    public float scrollSensibilidade = 300f;    // Velocidade do scroll
 
     private GameObject indicador;
-    private GameObject polegar;
+    private bool emPinça = false;
+    private float posAnteriorY;
     private ScrollRect scrollRect;
-    private List<Button> botoes = new List<Button>();
-
-    private bool clicando = false;
-    private Button botaoAtual = null;
-
-    private Vector3 posicaoAnteriorDedo;
 
     void Awake()
     {
         indicador = GameObject.FindGameObjectWithTag(indicadorTag);
-        polegar = GameObject.FindGameObjectWithTag(polegarTag);
-
-        if (indicador == null || polegar == null)
+        if (indicador == null)
         {
-            Debug.LogError("Indicador ou Polegar não encontrados! Configure as tags corretamente.");
-            return;
+            Debug.LogError("[PinchScrollAuto] Indicador não encontrado! Verifique a tag.");
         }
-
-        scrollRect = GetComponent<ScrollRect>();
-        if (scrollRect == null)
-        {
-            Debug.LogError("Nenhum ScrollRect encontrado! Adicione ao objeto.");
-        }
-
-        botoes.AddRange(GetComponentsInChildren<Button>());
-        posicaoAnteriorDedo = indicador.transform.position;
     }
 
     void Update()
     {
-        if (indicador == null || polegar == null) return;
+        if (!emPinça || indicador == null) return;
 
-        Vector3 posicaoAtual = indicador.transform.position;
-
-        // 🔹 Detecta se está em pinça (indicador e polegar próximos)
-        float pinchDist = Vector3.Distance(indicador.transform.position, polegar.transform.position);
-        bool emPinça = pinchDist < pinchThreshold;
-
-        if (emPinça)
+        // Se ainda não pegou o ScrollRect, tenta pegar o ativo
+        if (scrollRect == null)
         {
-            // 👉 Faz scroll
-            float deltaY = posicaoAtual.y - posicaoAnteriorDedo.y;
-            if (Mathf.Abs(deltaY) > 0.001f && scrollRect != null)
+            scrollRect = FindObjectOfType<ScrollRect>();
+            if (scrollRect != null)
             {
-                scrollRect.verticalNormalizedPosition += deltaY * scrollSensibilidade * Time.deltaTime;
+                Debug.Log("[PinchScrollAuto] ScrollRect detectado: " + scrollRect.gameObject.name);
             }
-        }
-        else
-        {
-            // 👉 Faz clique normal
-            Button maisProximo = null;
-            float menorDistancia = Mathf.Infinity;
-
-            foreach (Button b in botoes)
+            else
             {
-                float d = Vector3.Distance(b.transform.position, posicaoAtual);
-                if (d < menorDistancia)
-                {
-                    menorDistancia = d;
-                    maisProximo = b;
-                }
-            }
-
-            if (maisProximo != null)
-            {
-                if (!clicando && menorDistancia < clickThreshold)
-                {
-                    Debug.Log("Clicou no botão: " + maisProximo.gameObject.name);
-                    maisProximo.onClick.Invoke();
-                    botaoAtual = maisProximo;
-                    clicando = true;
-                }
-                else if (clicando && menorDistancia > resetThreshold)
-                {
-                    clicando = false;
-                    botaoAtual = null;
-                }
+                Debug.LogWarning("[PinchScrollAuto] Nenhum ScrollRect encontrado nesta cena.");
+                return;
             }
         }
 
-        posicaoAnteriorDedo = posicaoAtual;
+        // Calcula movimento vertical do indicador
+        float deltaY = indicador.transform.position.y - posAnteriorY;
+
+        // Atualiza a posição do scroll
+        float newPos = scrollRect.verticalNormalizedPosition - deltaY * scrollSensibilidade * Time.deltaTime;
+
+        // Limita entre 0 e 1
+        newPos = Mathf.Clamp01(newPos);
+
+        // Debug detalhado
+        Debug.Log($"[PinchScrollAuto] Scroll movido | deltaY={deltaY:F4} | pos={scrollRect.verticalNormalizedPosition:F4}→{newPos:F4}");
+
+        scrollRect.verticalNormalizedPosition = newPos;
+
+        posAnteriorY = indicador.transform.position.y;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag(indicadorTag))
+        {
+            emPinça = true;
+            posAnteriorY = indicador.transform.position.y;
+            Debug.Log("[PinchScrollAuto] Pinça iniciada!");
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag(indicadorTag))
+        {
+            emPinça = false;
+            Debug.Log("[PinchScrollAuto] Pinça finalizada!");
+        }
     }
 }

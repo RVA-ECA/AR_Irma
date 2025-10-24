@@ -10,6 +10,7 @@ TagManager:
   - Medio
   - Polegar
   - Palma
+  - IndicadorR
   layers:
   - Default
   - TransparentFX
