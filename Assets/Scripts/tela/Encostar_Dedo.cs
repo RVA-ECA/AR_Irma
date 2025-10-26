@@ -20,7 +20,7 @@ public class Encostar_Dedo_Collider : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // Verifica se o objeto que colidiu tem a tag "Indicador"
-        if (other.CompareTag("Indicador"))
+        if (other.CompareTag("IndicadorR"))
         {
             // Dispara o evento de clique do botão
             if (onClickButton != null)
@@ -34,7 +34,7 @@ public class Encostar_Dedo_Collider : MonoBehaviour
     // Opcional: Para feedback visual, você pode usar o OnTriggerExit
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Indicador"))
+        if (other.CompareTag("IndicadorR"))
         {
             Debug.Log("Indicador saiu da colisão. Pronto para novo clique.");
         }

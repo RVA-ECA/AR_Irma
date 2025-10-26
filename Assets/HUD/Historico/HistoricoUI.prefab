@@ -114,7 +114,6 @@ GameObject:
   - component: {fileID: 7373417130160301244}
   - component: {fileID: 5136598231355775099}
   - component: {fileID: 2191628160058340486}
-  - component: {fileID: 7023808872963624388}
   m_Layer: 5
   m_Name: Scroll View
   m_TagString: Untagged
@@ -210,24 +209,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &7023808872963624388
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2737134200543219123}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0c9ff6e974c69d4883a738c0cdb05b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  indicadorTag: Indicador
-  polegarTag: Polegar
-  pinchThreshold: 0.03
-  clickThreshold: 0.01
-  resetThreshold: 0.02
-  scrollSensibilidade: -1000
 --- !u!1 &2966538146968488036
 GameObject:
   m_ObjectHideFlags: 0
