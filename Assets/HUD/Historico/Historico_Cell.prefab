@@ -690,6 +690,7 @@ GameObject:
   - component: {fileID: 1989125374706281391}
   - component: {fileID: 8658295039593998175}
   - component: {fileID: 2572714110291700042}
+  - component: {fileID: 879017978350392987}
   m_Layer: 5
   m_Name: icon_plusInfo
   m_TagString: Untagged
@@ -858,6 +859,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &879017978350392987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3279119982176045777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a55b18aa11b7024584c0fd1082133ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3653280859761131937
 GameObject:
   m_ObjectHideFlags: 0
@@ -873,6 +886,7 @@ GameObject:
   - component: {fileID: 6148630169164451566}
   - component: {fileID: 1313711342598372843}
   - component: {fileID: 8433861283765431522}
+  - component: {fileID: 6362897582691653827}
   m_Layer: 5
   m_Name: Button_rma
   m_TagString: Untagged
@@ -1041,6 +1055,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &6362897582691653827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3653280859761131937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a55b18aa11b7024584c0fd1082133ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4160658501302635192
 GameObject:
   m_ObjectHideFlags: 0
