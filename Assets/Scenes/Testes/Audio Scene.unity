@@ -156,10 +156,10 @@ RectTransform:
   - {fileID: 267817159}
   m_Father: {fileID: 1937701885}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -274, y: -92.5}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 630, y: -284}
+  m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &22838281
 MonoBehaviour:
@@ -501,10 +501,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1937701885}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -346.1, y: -10.2}
-  m_SizeDelta: {x: 666.0426, y: 52.6616}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 379.5, y: -119.5}
+  m_SizeDelta: {x: 759, y: 239}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &386152580
 MonoBehaviour:
@@ -560,8 +560,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -854,18 +854,18 @@ MonoBehaviour:
         m_Calls: []
   runtimeConfiguration:
     witConfiguration: {fileID: 11400000, guid: dc5aa3ffe41474247ad3381e33889346, type: 2}
-    minKeepAliveVolume: 0.0005
-    minKeepAliveTimeInSeconds: 2
-    minTranscriptionKeepAliveTimeInSeconds: 1
-    maxRecordingTime: 20
+    minKeepAliveVolume: 0.0001
+    minKeepAliveTimeInSeconds: 150
+    minTranscriptionKeepAliveTimeInSeconds: 150
+    maxRecordingTime: 150
     overrideTimeoutMs: 0
-    soundWakeThreshold: 0.0005
-    sampleLengthInMs: 10
-    micBufferLengthInSeconds: 1
-    maxConcurrentRequests: 5
+    soundWakeThreshold: 0.0002
+    sampleLengthInMs: 500
+    micBufferLengthInSeconds: 15
+    maxConcurrentRequests: 10
     sendAudioToWit: 1
     customTranscriptionProvider: {fileID: 0}
-    alwaysRecord: 0
+    alwaysRecord: 1
     preferredActivationOffset: -0.5
     transcribeOnly: 0
     pubSubSettings:
@@ -1034,10 +1034,10 @@ RectTransform:
   - {fileID: 590024639}
   m_Father: {fileID: 1937701885}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -491.4, y: -91.9}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 125, y: -289}
+  m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1489671453
 MonoBehaviour:

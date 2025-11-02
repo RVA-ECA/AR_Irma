@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -44,7 +45,7 @@ public static class JsonHelper
 // Script principal
 public class APIManager : MonoBehaviour
 {
-    public string apiUrl = "https://0002e27b1229.ngrok-free.app/api/dados";
+    public string apiUrl = "C:/Users/joahi/Downloads/Teste.txt";
 
     public RMA[] rmas; // Armazena os dados para usar no app
 
@@ -57,6 +58,9 @@ public class APIManager : MonoBehaviour
     {
         using (UnityWebRequest request = UnityWebRequest.Get(apiUrl))
         {
+            Debug.Log("request:");
+            Debug.Log(request);
+
             // Cabeçalho para pular aviso do Ngrok
             request.SetRequestHeader("ngrok-skip-browser-warning", "true");
 

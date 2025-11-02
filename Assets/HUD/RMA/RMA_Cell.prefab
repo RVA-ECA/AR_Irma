@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 3888427960335226491}
   - component: {fileID: 1789462264484014948}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Para_Gravacao
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -267,7 +267,7 @@ GameObject:
   - component: {fileID: 8538148888246112813}
   - component: {fileID: 7720083042615304278}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Gravar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
